@@ -1,4 +1,4 @@
-package com.github.vjames19.kweather
+package com.github.vjames19.kweather.ui.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

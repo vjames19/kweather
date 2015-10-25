@@ -1,4 +1,4 @@
-package com.github.vjames19.kweather
+package com.github.vjames19.kweather.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.github.vjames19.kweather.ui.adapters.ForecastListAdapter
+import com.github.vjames19.kweather.R
+import com.github.vjames19.kweather.data.Request
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         val forecastList = findViewById(R.id.forecast_list) as RecyclerView
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)
+
+        val url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7"
+
+        async {
+            Request(url).run()
+            uiThread { longToast("Request performed") }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
