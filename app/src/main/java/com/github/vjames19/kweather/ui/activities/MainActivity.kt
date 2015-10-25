@@ -9,8 +9,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.github.vjames19.kweather.R
 import com.github.vjames19.kweather.domain.commands.RequestForecastCommand
+import com.github.vjames19.kweather.domain.model.Forecast
 import com.github.vjames19.kweather.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.async
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +29,12 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand("75240").execute();
 
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result);
+                forecastList.adapter = ForecastListAdapter(result,
+                        object : ForecastListAdapter.OnItemClickListener {
+                            override fun invoke(forecast: Forecast) {
+                                toast(forecast.date)
+                            }
+                        })
             }
         }
     }
