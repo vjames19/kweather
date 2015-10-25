@@ -14,6 +14,9 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.layoutInflater
 import org.jetbrains.anko.onClick
 
+import kotlinx.android.synthetic.item_forecast.view.*
+
+
 /**
  * Created by vjames19 on 10/24/15.
  */
@@ -34,28 +37,13 @@ class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Foreca
     class ViewHolder(val view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
 
-        private val iconView: ImageView
-        private val dateView: TextView
-        private val descriptionView: TextView
-        private val maxTemperatureView: TextView
-        private val minTemperatureView: TextView
-
-        init {
-            iconView = view.find(R.id.icon)
-            dateView = view.find(R.id.date)
-            descriptionView = view.find(R.id.description)
-            maxTemperatureView = view.find(R.id.maxTemperature)
-            minTemperatureView = view.find(R.id.minTemperature)
-        }
-
         fun bindToForecast(forecast: Forecast) {
             with(forecast) {
-                Picasso.with(itemView.context).load(iconUrl).into(iconView)
-                dateView.text = date;
-                descriptionView.text = description
-                maxTemperatureView.text = "${high.toString()}º"
-                minTemperatureView.text = "${low.toString()}º"
-
+                Picasso.with(itemView.context).load(iconUrl).into(itemView.icon)
+                itemView.date.text = date
+                itemView.description.text = description
+                itemView.maxTemperature.text = "${high.toString()}￿￿"
+                itemView.minTemperature.text = "${low.toString()}￿￿"
                 itemView.onClick { itemClick(forecast) }
             }
         }
