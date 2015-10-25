@@ -3,6 +3,7 @@ package com.github.vjames19.kweather.ui.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import com.github.vjames19.kweather.R
@@ -16,7 +17,7 @@ import org.jetbrains.anko.onClick
 /**
  * Created by vjames19 on 10/24/15.
  */
-public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: ForecastListAdapter.OnItemClickListener) :
+public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
@@ -30,7 +31,7 @@ public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: 
 
     override fun getItemCount(): Int = weekForecast.size()
 
-    class ViewHolder(val view: View, val itemClick: OnItemClickListener) :
+    class ViewHolder(val view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
 
         private val iconView: ImageView
@@ -58,9 +59,5 @@ public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: 
                 itemView.onClick { itemClick(forecast) }
             }
         }
-    }
-
-    public interface OnItemClickListener {
-        fun invoke(forecast: Forecast)
     }
 }
