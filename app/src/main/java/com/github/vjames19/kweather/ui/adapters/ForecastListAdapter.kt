@@ -17,7 +17,7 @@ import org.jetbrains.anko.onClick
 /**
  * Created by vjames19 on 10/24/15.
  */
-public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
+class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder? {
@@ -29,7 +29,7 @@ public class ForecastListAdapter(val weekForecast: ForecastList, val itemClick: 
         holder.bindToForecast(weekForecast[position])
     }
 
-    override fun getItemCount(): Int = weekForecast.size()
+    override fun getItemCount() = weekForecast.size()
 
     class ViewHolder(val view: View, val itemClick: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
